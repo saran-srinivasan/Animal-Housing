@@ -1,43 +1,43 @@
-import { Layout } from '@/components/layout'
-import { Dashboard } from '@/components/dashboard'
-import { DataTable } from '@/components/data-table'
-import { AnimalForm } from '@/components/animal-form'
-import { Calendar } from '@/components/calendar'
-import { Modal } from '@/components/modal'
-import { Toaster } from '@/components/toast'
+import { Layout } from "@/components/layout";
+import { Dashboard } from "@/components/dashboard";
+import { DataTable } from "@/components/data-table";
+import { AnimalForm } from "@/components/animal-form";
+import { Calendar } from "@/components/calendar";
+import { Modal } from "@/components/modal";
+import { Toaster } from "@/components/toast";
 
 const columns = [
   {
-    accessorKey: 'name',
-    header: 'Name',
+    accessorKey: "sno",
+    header: "S.No",
   },
   {
-    accessorKey: 'species',
-    header: 'Species',
+    accessorKey: "species",
+    header: "Species",
   },
   {
-    accessorKey: 'age',
-    header: 'Age',
+    accessorKey: "noOfAnimals",
+    header: "Nos",
   },
-]
+];
 
 const data = [
   {
-    name: 'Max',
-    species: 'Dog',
-    age: 5,
+    sno: 1,
+    species: "Dog",
+    noOfAnimals: 15,
   },
   {
-    name: 'Luna',
-    species: 'Cat',
-    age: 3,
+    sno: 2,
+    species: "Cat",
+    noOfAnimals: 13,
   },
   {
-    name: 'Charlie',
-    species: 'Rabbit',
-    age: 2,
+    sno: 3,
+    species: "Rabbit",
+    noOfAnimals: 22,
   },
-]
+];
 
 export default function Home() {
   return (
@@ -64,6 +64,5 @@ export default function Home() {
       </div>
       <Toaster />
     </Layout>
-  )
+  );
 }
-
