@@ -1,6 +1,6 @@
 import Axios from "../utils/Axios";
 
-export const createStudy = async (newStudy) => {
+export const createStudy = async (newStudy: unknown) => {
   try {
     const response = await Axios.post("/study", newStudy);
     console.log("Study created successfully:", response.data);
@@ -22,7 +22,7 @@ export const getAllStudies = async () => {
   }
 };
 
-export const getStudybyId = async (id) => {
+export const getStudybyId = async (id: unknown) => {
   try {
     const response = await Axios.get(`/study/${id}`, { params: id });
     console.log("Study updated successfully:", response);
@@ -33,7 +33,7 @@ export const getStudybyId = async (id) => {
   }
 };
 
-export const fetchGLRstudyData = async (token) => {
+export const fetchGLRstudyData = async (token: unknown) => {
   try {
     const response = await Axios.get("/fetchGLRstudyData", {
       headers: {
@@ -48,7 +48,7 @@ export const fetchGLRstudyData = async (token) => {
   }
 };
 
-export const updateStudy = async (id, updatedStudy) => {
+export const updateStudy = async (id: unknown, updatedStudy: unknown) => {
   try {
     const response = await Axios.put(`/study`, updatedStudy);
     console.log("Study updated successfully:", response);
@@ -59,7 +59,7 @@ export const updateStudy = async (id, updatedStudy) => {
   }
 };
 
-export const deleteStudy = async (id) => {
+export const deleteStudy = async (id: unknown) => {
   try {
     const response = await Axios.delete(`/study/${id}`);
     console.log("Study deleted successfully:", response);
