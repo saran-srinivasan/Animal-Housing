@@ -20,19 +20,19 @@ import {
 import { CreateStudyModal } from "./study/create-study";
 import { createTestRoom } from "@/api/testRoomApi";
 
-const housingOptions = [
-  { label: "Individual", value: "individual" },
-  { label: "Both", value: "both" },
-  { label: "Group", value: "group" },
-];
-const AnimalOptions = [
-  { label: "Rabbit", value: "Rabbit" },
-  { label: "Rat", value: "Rat" },
-  { label: "GuineaPig", value: "GuineaPig" },
-  { label: "Rabbit-Pyrogen", value: "Rabbit-Pyrogen" },
-  { label: "Hamster", value: "Hamster" },
-  { label: "Mice", value: "Mice" },
-];
+// const housingOptions = [
+//   { label: "Individual", value: "individual" },
+//   { label: "Both", value: "both" },
+//   { label: "Group", value: "group" },
+// ];
+// const AnimalOptions = [
+//   { label: "Rabbit", value: "Rabbit" },
+//   { label: "Rat", value: "Rat" },
+//   { label: "GuineaPig", value: "GuineaPig" },
+//   { label: "Rabbit-Pyrogen", value: "Rabbit-Pyrogen" },
+//   { label: "Hamster", value: "Hamster" },
+//   { label: "Mice", value: "Mice" },
+// ];
 
 type TestRoom = {
   roomNo: string;
@@ -48,7 +48,7 @@ export function TestRoomManagement() {
   const [isCreateStudyModalOpen, setIsCreateStudyModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [currentRoom, setCurrentRoom] = useState<TestRoom | null>(null);
+  const [currentRoom] = useState<TestRoom | null>(null);
 
   const handleAddRoom = async (room: TestRoom) => {
     setTestRooms([...testRooms, { ...room }]);

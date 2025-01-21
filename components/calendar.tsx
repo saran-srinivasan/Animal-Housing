@@ -1,26 +1,25 @@
-
-'use client'
-import { useState } from 'react'
-import { addDays, format } from 'date-fns'
-import { Calendar as CalendarComponent } from '@/components/ui/calendar'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { DateRange } from 'react-day-picker'
-import { StudyModal } from './study-modal'
+"use client";
+import { useState } from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { DateRange } from "react-day-picker";
+import { StudyModal } from "./study-modal";
 
 export function Calendar() {
-  const [dateRange, setDateRange] = useState<DateRange | undefined>()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectRange = (range: DateRange | undefined) => {
-    setDateRange(range)
-  }
+    setDateRange(range);
+  };
 
   const handleAddStudy = () => {
     if (dateRange?.from && dateRange?.to) {
-      setIsModalOpen(true)
+      setIsModalOpen(true);
     }
-  }
+  };
 
   return (
     <Card>
@@ -37,12 +36,16 @@ export function Calendar() {
         />
         <div className="mt-4">
           <p className="text-sm text-gray-500">
-            Selected range:{' '}
+            Selected range:{" "}
             {dateRange?.from && dateRange?.to
-              ? `${format(dateRange.from, 'PPP')} - ${format(dateRange.to, 'PPP')}`
-              : 'No date range selected'}
+              ? `${format(dateRange.from, "PPP")} - ${format(dateRange.to, "PPP")}`
+              : "No date range selected"}
           </p>
-          <Button className="mt-2" onClick={handleAddStudy} disabled={!dateRange?.from || !dateRange?.to}>
+          <Button
+            className="mt-2"
+            onClick={handleAddStudy}
+            disabled={!dateRange?.from || !dateRange?.to}
+          >
             Add Study
           </Button>
         </div>
@@ -53,6 +56,5 @@ export function Calendar() {
         />
       </CardContent>
     </Card>
-  )
+  );
 }
-

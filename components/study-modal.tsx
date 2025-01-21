@@ -1,17 +1,17 @@
-'use client'
-import { useState } from 'react'
-import { format } from 'date-fns'
-import { DateRange } from 'react-day-picker'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+"use client";
+import { useState } from "react";
+import { format } from "date-fns";
+import { DateRange } from "react-day-picker";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -19,65 +19,68 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/hooks/use-toast'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
-  studyName: z.string().min(2, 'Study name must be at least 2 characters'),
-  species: z.string().min(2, 'Species must be at least 2 characters'),
-  numberOfAnimals: z.number().min(1, 'Number of animals must be at least 1'),
-})
+  studyName: z.string().min(2, "Study name must be at least 2 characters"),
+  species: z.string().min(2, "Species must be at least 2 characters"),
+  numberOfAnimals: z.number().min(1, "Number of animals must be at least 1"),
+});
 
 type StudyModalProps = {
-  isOpen: boolean
-  onClose: () => void
-  dateRange: DateRange | undefined
-}
+  isOpen: boolean;
+  onClose: () => void;
+  dateRange: DateRange | undefined;
+};
 
 // This would typically come from your backend or state management
-const MAX_CAPACITY = 50
+const MAX_CAPACITY = 50;
 const getExistingAnimals = (start: Date, end: Date) => {
   // Simulating an API call or database query
-  return 40
-}
+  console.log("Fetching existing animals for date range:", start, end);
+
+  return 40;
+};
 
 export function StudyModal({ isOpen, onClose, dateRange }: StudyModalProps) {
-  const [remainingCapacity, setRemainingCapacity] = useState(MAX_CAPACITY)
-  const { toast } = useToast()
+  const [remainingCapacity] = useState(MAX_CAPACITY);
+  const { toast } = useToast();
+  console.log(remainingCapacity);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      studyName: '',
-      species: '',
+      studyName: "",
+      species: "",
       numberOfAnimals: 1,
     },
-  })
+  });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (dateRange?.from && dateRange?.to) {
-      const existingAnimals = getExistingAnimals(dateRange.from, dateRange.to)
-      const availableCapacity = MAX_CAPACITY - existingAnimals
+      const existingAnimals = getExistingAnimals(dateRange.from, dateRange.to);
+      const availableCapacity = MAX_CAPACITY - existingAnimals;
 
       if (values.numberOfAnimals <= availableCapacity) {
         // Process the submission
         toast({
-          title: 'Study Added',
+          title: "Study Added",
           description: `${values.studyName} has been scheduled with ${values.numberOfAnimals} ${values.species}.`,
-        })
-        onClose()
+        });
+        onClose();
       } else {
-        const overflow = values.numberOfAnimals - availableCapacity
+        const overflow = values.numberOfAnimals - availableCapacity;
         toast({
-          title: 'Capacity Exceeded',
+          title: "Capacity Exceeded",
           description: `Only ${availableCapacity} animals can be added for this date range. Please adjust the number of animals or choose different dates for the remaining ${overflow} animals.`,
-          variant: 'destructive',
-        })
+          variant: "destructive",
+        });
       }
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -87,8 +90,8 @@ export function StudyModal({ isOpen, onClose, dateRange }: StudyModalProps) {
           <DialogDescription>
             Enter study details for the selected date range:
             {dateRange?.from && dateRange?.to
-              ? ` ${format(dateRange.from, 'PPP')} - ${format(dateRange.to, 'PPP')}`
-              : ''}
+              ? ` ${format(dateRange.from, "PPP")} - ${format(dateRange.to, "PPP")}`
+              : ""}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -141,6 +144,5 @@ export function StudyModal({ isOpen, onClose, dateRange }: StudyModalProps) {
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

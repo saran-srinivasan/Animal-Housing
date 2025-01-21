@@ -28,9 +28,7 @@ export function AnimalDetailView({
   animal,
   occupiedRooms,
 }: AnimalDetailViewProps) {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    new Date()
-  );
+  const [selectedDate] = useState<Date | undefined>(new Date());
   const studies = useRecoilValue(selectedStudiesState);
 
   return (

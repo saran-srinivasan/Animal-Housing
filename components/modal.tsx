@@ -1,7 +1,6 @@
-
-'use client'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 
 export function Modal() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -23,15 +22,15 @@ export function Modal() {
         <DialogHeader>
           <DialogTitle>Edit Animal</DialogTitle>
           <DialogDescription>
-            Make changes to the animal's information here. Click save when you're done.
+            Make changes to the animal information here. Click save when you are
+            done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          {/* Form fields would go here */}
-        </div>
-        <Button type="submit" onClick={() => setOpen(false)}>Save changes</Button>
+        <div className="grid gap-4 py-4">{/* Form fields would go here */}</div>
+        <Button type="submit" onClick={() => setOpen(false)}>
+          Save changes
+        </Button>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-
